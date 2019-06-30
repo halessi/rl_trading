@@ -22,4 +22,12 @@ python main.py
 ```
 
 # Some results
+As can be seen in the images below, ....
 
+Problems with reinforcement learning in time-series challenges like this involved delayed credit-assignment and a fundamental lack of signal. It is unclear whether the OHLCV data we use here, even when preprocessed, contains any signal.  
+
+# Future steps
+- [ ] set up command-line-args inputs to enable more rapid model and environment prototyping
+- [ ] attempt to use an autoencoder for feature extraction on OHLCV data before feeding to RL
+- [X] implement basic MinMax scaling with scikit-learn
+- [X] build OpenAI gym environment
