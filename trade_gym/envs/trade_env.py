@@ -2,6 +2,7 @@ import os
 
 import gym
 import matplotlib.pyplot as plt
+plt.style.use('ggplot')
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -144,7 +145,7 @@ class TradeEnv(gym.Env):
             state = self.ae.predict(np.expand_dims(state, axis = 0))[0]
 
         assert state.shape == self.observation_space.shape, print('Error, observation shape incorrect: {}. Should be: {}'.format(state.shape, 
-                                                                                                                self.observation_space.shape))                                                                                                                                                                                                                                                                  
+                                                                                                                self.observation_space.shape))                                         
         try:
             return state.values
         except AttributeError: # already numpy array
@@ -201,21 +202,23 @@ class TradeEnv(gym.Env):
             _img = pd.DataFrame(self.scaler.inverse_transform(self.image), columns = self.columns)
 
             if self.fig is None:
-                self.fig, self.axes = plt.subplots(nrows = len(self.columns), ncols = 1)
-                for counter, col in enumerate(self.columns):
-                    self.axes[counter].plot(_img[col], label = col)
-                plt.show(block = True)
+                self.fig, = plt.plot(_img[self.columns[0]], label = self.columns[0])
+                self.fig.axes.set_title(self.columns[0] + ' Price')
+                self.fig.axes.grid('on')
+                plt.autoscale(enable = True, axis = 'y', tight = True)
+                plt.draw()
                 plt.pause(1e-8)
             else:
-                for counter, col in enumerate(self.columns):
-                    self.axes[counter].set_data(range(len(_img[col])), _img[col])
+                self.fig.axes.set_ylim(bottom = min(_img[self.columns[0]]), top = max(_img[self.columns[0]]))
+                self.fig.set_data(range(len(_img[self.columns[0]])),  _img[self.columns[0]])
                 plt.pause(1e-8)
             
 
 if __name__ == '__main__':
     env = TradeEnv(window = 50, 
                    datadir = 'stocks/aapl_1min.csv', 
-                   preprocesses = ['MinMax'])
+                   preprocesses = ['MinMax']
+                   )
     env.reset()
     done = False
     while done == False:
