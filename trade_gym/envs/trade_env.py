@@ -26,10 +26,12 @@ class TradeEnv(gym.Env):
                  use_market_profile = False):
         self.window = window
         self.reward_meth = reward
-        self.action_space = spaces.Discrete(3)
+        #self.action_space = spaces.Discrete(3)
+        self.action_space = dict(type = 'int', shape = 1, num_actions = 3, min_value = 0, max_value = 2)
         self.use_market_profile = use_market_profile
         self.preprocesses = preprocesses
         self.fig = None
+        self.past_actions = []
 
         '''FIXME: is this correct? '''
         self.commission = 0.1 / 100
@@ -56,8 +58,9 @@ class TradeEnv(gym.Env):
             elif preprocess == 'autoencode':
                 self.data = self.preprocess_autoencode()
         
-        if self.observation_space is None:
-            self.observation_space = spaces.Box(low = 0, high = 10000, shape = (self.window, self.data.shape[1]))
+        if self.observation_space is None: # not yet set by preprocessing
+            self.observation_space = dict(type = 'float', shape = [self.window, self.data.shape[1]])
+            #self.observation_space = spaces.Box(low = 0, high = 10000, shape = (self.window, self.data.shape[1]))
             print(self.data.head(n=5))
 
     def reset(self):
@@ -100,8 +103,11 @@ class TradeEnv(gym.Env):
 
     def load_normal(self, datadir):
         dtypes = {'Date': str, 'Time': str}
-        df = pd.read_csv(datadir, sep=',', header=0, names=['Date', 'Time', 'Open', 'High', 'Low', 'Close', 'Volume'], dtype=dtypes, engine = 'python')
-        df.index = pd.to_datetime(df.Time)
+        df = pd.read_csv(datadir, sep=',', names=['Date', 'Time', 'Open', 'High', 'Low', 'Close', 'Volume'], dtype=dtypes, engine = 'python')
+        try:
+            df.index = pd.to_datetime(df.Time)
+        except ValueError: # we ALLOW failure here to enable ease of using datasets with oddly formatted times, XXX: add conversion
+            pass
 
         df = df.iloc[0:1000]
 
@@ -144,16 +150,15 @@ class TradeEnv(gym.Env):
                 state = np.array(state).flatten()
             state = self.ae.predict(np.expand_dims(state, axis = 0))[0]
 
-        assert state.shape == self.observation_space.shape, print('Error, observation shape incorrect: {}. Should be: {}'.format(state.shape, 
-                                                                                                                self.observation_space.shape))                                         
+        # assert state.shape == self.observation_space.shape, print('Error, observation shape incorrect: {}. Should be: {}'.format(state.shape, 
+        #                                                                                                         self.observation_space['shape']))                                         
         try:
             return state.values
         except AttributeError: # already numpy array
             return state
 
     def step(self, action):
-        assert self.action_space.contains(action)
-
+        #assert self.action_space.contains(action)   
         curr_price = self.get_current_price()
 
         # determine portfolio value
@@ -196,6 +201,15 @@ class TradeEnv(gym.Env):
         }
 
         return self.get_next_state(), reward, done, info
+
+    def execute(self, action):
+        ''' 
+        wrap step in execute for TensorForce's "runner" class 
+        (it doesn't track info)
+        '''
+        s, r, d, i = self.step(action)
+        # note execute expects state, done, reward (different order)
+        return s, d, r
 
     def render(self, mode):
         if mode == 'human':
