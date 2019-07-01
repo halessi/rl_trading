@@ -51,15 +51,24 @@ def main():
                                                                                     reward=r.episode_rewards[-1]))
         return True
 
-    runner.run(episodes=100, episode_finished=episode_finished)
-    runner.close()  
+    runner.run(episodes=1, episode_finished=episode_finished)
 
     print("Learning finished. Total episodes: {ep}. Average reward of last 10 episodes (of 100): {ar}.".format(
     ep=runner.episode,
-    ar=np.mean(runner.episode_rewards[-10:]))
+    ar=np.mean(runner.episode_rewards[-1:]))
     )
 
-    print('Testing for an episde...')
+    print('Testing for an episode...')
+
+    s = env.reset()
+
+    while True:
+        action = agent.act(s)
+        s, r, d, i = env.step(action)
+        agent.observe(reward = r, terminal = d)
+        env.render()
+        if d:
+            break
 
 
 if __name__ == '__main__':
