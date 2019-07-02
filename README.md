@@ -1,6 +1,7 @@
 # rl_trading
-I've created this repo out of an effort to better track my explorations of various topics related to algorithmic trading, usually RL-based. Please reach out if you have any questions!
+I've created this repo out of an effort to better track my explorations of various topics related to algorithmic trading, usually RL-based. I'll be working over the next couple months to build this out as a consolidated code-base for all the various side projects I've explored. 
 
+Please reach out if you have any questions!
 __hughalessi@gmail.com__
 
 # Installation
