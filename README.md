@@ -29,6 +29,10 @@ As can be seen in the images below, ....
 
 Problems with reinforcement learning in time-series challenges like this involved delayed credit-assignment and a fundamental lack of signal. It is unclear whether the OHLCV data we use here, even when preprocessed, contains any signal.  
 
+[image]
+
+[image]
+
 # Future steps (notes for me!)
 - [ ] implement here a convolutional network for derivation of more specific state information
 - [ ] explore applicability of renko-blocks to denoising time-series data
