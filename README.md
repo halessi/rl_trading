@@ -36,7 +36,7 @@ Problems with reinforcement learning in time-series challenges struggle from a v
 # Future steps (notes for me!)
 - [ ] run with aggregated bitcoin order book data
 - [ ] implement here a convolutional network for derivation of more specific state information
-- [ ] explore applicability of renko-blocks to denoising time-series data
+- [ ] explore applicability of renko-blocks for denoising time-series data
 - [ ] incorporate sentiment analysis into state information
 - [ ] set up command-line-args input to enable more rapid model and environment prototyping
 - [ ] attempt to use an autoencoder for feature extraction on OHLCV data before feeding to RL
