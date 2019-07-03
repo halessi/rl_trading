@@ -27,13 +27,14 @@ python main.py
 # Some results
 As can be seen in the images below, ....
 
-Problems with reinforcement learning in time-series challenges like this involved delayed credit-assignment and a fundamental lack of signal. It is unclear whether the OHLCV data we use here, even when preprocessed, contains any signal.  
+Problems with reinforcement learning in time-series challenges struggle from a variety of issues, including delayed credit assignment and a low signal-to-noise ratios. It is unclear whether the OHLCV data we use here, even when preprocessed, contains sufficient signal for advantageously predicting future prices. 
 
 [image]
 
 [image]
 
 # Future steps (notes for me!)
+- [ ] run with aggregated bitcoin order book data
 - [ ] implement here a convolutional network for derivation of more specific state information
 - [ ] explore applicability of renko-blocks to denoising time-series data
 - [ ] incorporate sentiment analysis into state information
