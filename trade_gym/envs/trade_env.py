@@ -226,16 +226,15 @@ class TradeEnv(gym.Env):
                 self.ax.grid('on')
                 plt.pause(1e-8)
             else:
-                self.ax.clear()
                 self.ax.set_ylim(bottom = min(_img[self.columns[0]]) - 0.1, top = max(_img[self.columns[0]]) + 0.1)
                 self.ax.set_xlim(0, 50)
-                self.ax.plot(range(len(_img[self.columns[0]])), _img[self.columns[0]])
+                self.ax.set_ydata(range(len(_img[self.columns[0]])), _img[self.columns[0]])
 
                 if self.steps > self.window * 2:
                     buys, sells = [], []
                     for counter, act in enumerate(self.past_actions[-50:]):
-                        if act[0] == 1:   buys.append((act[1], act[2]))  # buy
-                        elif act[0] == 2: sells.append((act[1], act[2])) # sell
+                        if act[0] == 1:    buys.append((act[1], act[2]))  # buy
+                        elif act[0] == 2:  sells.append((act[1], act[2])) # sell
                     self.ax.scatter(*zip(*buys), c = 'green', marker = '^')
                     self.ax.scatter(*zip(*sells), c =  'red', marker = 'v')
 

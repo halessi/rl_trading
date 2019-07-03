@@ -29,9 +29,9 @@ As can be seen in the images below, ....
 
 Problems with reinforcement learning in time-series challenges struggle from a variety of issues, including delayed credit assignment and a low signal-to-noise ratios. It is unclear whether the OHLCV data we use here, even when preprocessed, contains sufficient signal for advantageously predicting future prices. 
 
-[image]
+![Optional Text](../master/imgs/btc_120114_to_030115.png)
 
-[image]
+![Optional Text](../master/imgs/AAPL.png)
 
 # Future steps (notes for me!)
 - [ ] run with aggregated bitcoin order book data
