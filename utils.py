@@ -3,6 +3,7 @@ plt.style.use('ggplot')
 
 def plot(collectables, portion):
     '''
+    quick bandaid for broken render feature
     given a list of (price, action) in the form collectables, create an 
     image of what the agent did over time
     '''
@@ -24,5 +25,5 @@ def plot(collectables, portion):
     ax.grid('on')
 
     # save plot
-    plt.savefig('imgs/plot.png')
+    plt.savefig('imgs/BTC')
     plt.show()

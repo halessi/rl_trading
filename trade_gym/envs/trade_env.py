@@ -109,8 +109,6 @@ class TradeEnv(gym.Env):
         except ValueError: # we ALLOW failure here to enable ease of using datasets with oddly formatted times, XXX: add conversion
             pass
 
-        df = df.iloc[0:1000]
-
         if self.use_market_profile: 
             self.mp = MarketProfile(df, mode = 'tpo')
 
@@ -161,7 +159,7 @@ class TradeEnv(gym.Env):
         #assert self.action_space.contains(action)   
         curr_price = self.get_current_price()
 
-        self.past_actions.append((action, self.steps, curr_price))
+        #self.past_actions.append((action, self.steps, curr_price))
 
         # determine portfolio value
         portfolio = self.cash + \
@@ -214,32 +212,34 @@ class TradeEnv(gym.Env):
         return s, d, r
 
     def render(self, mode = 'human'):
-        if mode == 'human':
-            #_img = pd.DataFrame(self.scaler.inverse_transform(self.image), columns = self.columns)
-            _img = self.image
+        ''' TODO: fix '''
+        pass
+        # if mode == 'human':
+        #     #_img = pd.DataFrame(self.scaler.inverse_transform(self.image), columns = self.columns)
+        #     _img = self.image
 
-            if self.fig is None:
-                self.fig = plt.figure(figsize = (8,5))
-                self.ax = self.fig.add_subplot(111)
-                self.ax.plot(_img[self.columns[0]], label = self.columns[0])
-                self.ax.set_title(self.columns[0] + ' Price')
-                self.ax.grid('on')
-                plt.pause(1e-8)
-            else:
-                self.ax.set_ylim(bottom = min(_img[self.columns[0]]) - 0.1, top = max(_img[self.columns[0]]) + 0.1)
-                self.ax.set_xlim(0, 50)
-                self.ax.set_ydata(range(len(_img[self.columns[0]])), _img[self.columns[0]])
+        #     if self.fig is None:
+        #         self.fig = plt.figure(figsize = (8,5))
+        #         self.ax = self.fig.add_subplot(111)
+        #         self.ax.plot(_img[self.columns[0]], label = self.columns[0])
+        #         self.ax.set_title(self.columns[0] + ' Price')
+        #         self.ax.grid('on')
+        #         plt.pause(1e-8)
+        #     else:
+        #         self.ax.set_ylim(bottom = min(_img[self.columns[0]]) - 0.1, top = max(_img[self.columns[0]]) + 0.1)
+        #         self.ax.set_xlim(0, 50)
+        #         self.ax.set_ydata(range(len(_img[self.columns[0]])), _img[self.columns[0]])
 
-                if self.steps > self.window * 2:
-                    buys, sells = [], []
-                    for counter, act in enumerate(self.past_actions[-50:]):
-                        if act[0] == 1:    buys.append((act[1], act[2]))  # buy
-                        elif act[0] == 2:  sells.append((act[1], act[2])) # sell
-                    self.ax.scatter(*zip(*buys), c = 'green', marker = '^')
-                    self.ax.scatter(*zip(*sells), c =  'red', marker = 'v')
+        #         if self.steps > self.window * 2:
+        #             buys, sells = [], []
+        #             for counter, act in enumerate(self.past_actions[-50:]):
+        #                 if act[0] == 1:    buys.append((act[1], act[2]))  # buy
+        #                 elif act[0] == 2:  sells.append((act[1], act[2])) # sell
+        #             self.ax.scatter(*zip(*buys), c = 'green', marker = '^')
+        #             self.ax.scatter(*zip(*sells), c =  'red', marker = 'v')
 
-                plt.show(block = False)
-                plt.pause(1e-8)
+        #         plt.show(block = False)
+        #         plt.pause(1e-8)
             
 
 if __name__ == '__main__':

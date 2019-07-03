@@ -15,7 +15,7 @@ def main():
     '''
     env = gym.make('Trade-v0',
                    window = 50, 
-                   datadir = 'stocks/aapl_1min.csv',
+                   datadir = 'stocks/s_coinbaseUSD_1_min_data_2014-12-01_to_2018-11-11.csv',
                    preprocesses = ['MinMax']
                    )
 
@@ -51,11 +51,11 @@ def main():
                                                                                     reward=r.episode_rewards[-1]))
         return True
 
-    runner.run(episodes=100, episode_finished=episode_finished)
+    runner.run(episodes=10, episode_finished=episode_finished)
 
-    print("Learning finished. Total episodes: {ep}. Average reward of last 10 episodes (of 100): {ar}.".format(
+    print("Learning finished. Total episodes: {ep}. Average reward of last 10 episodes (of 10): {ar}.".format(
             ep=runner.episode,
-            ar=np.mean(runner.episode_rewards[-10:]))
+            ar=np.mean(runner.episode_rewards[-5:]))
     )
 
     print('Testing for an episode...')
@@ -71,7 +71,7 @@ def main():
         if d:
             break
     
-    plot(collectables, 0.1)
+    plot(collectables, 0.001) # plot only .1% of one episode
 
 if __name__ == '__main__':
     main()
