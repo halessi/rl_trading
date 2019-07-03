@@ -5,7 +5,7 @@ Please reach out if you have any questions!
 __hughalessi@gmail.com__
 
 # Installation
-If you'd like to make use of this code, the easiest method for doing so will be cloning the repository and creating a new conda environment based upon the yml file. 
+If you'd like to make use of this code the current, easiest method for doing so will be cloning the repository and creating a new conda environment based upon the yml file. 
 
 ```
 git clone https://github.com/halessi/rl_trading
