@@ -19,7 +19,7 @@ source activate rl_trading
 ```
 
 # Training a model
-As the code stands now, a TensorForce PPO agent is hardcoded into main.py. To train this agent, run
+As the code stands now, a TensorForce PPO agent is hardcoded into main.py. To train this agent, run:
 ```
 python main.py
 ```
