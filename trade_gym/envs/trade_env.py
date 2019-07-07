@@ -206,9 +206,10 @@ class TradeEnv(gym.Env):
         ''' 
         wrap step in execute for TensorForce's "runner" class 
         (it doesn't track info)
+
+        note execute expects state, done, reward (different order)
         '''
         s, r, d, i = self.step(action)
-        # note execute expects state, done, reward (different order)
         return s, d, r
 
     def render(self, mode = 'human'):
@@ -240,9 +241,24 @@ class TradeEnv(gym.Env):
 
         #         plt.show(block = False)
         #         plt.pause(1e-8)
+
+    def create_autoencoder_data(self):
+        self.reset()
+        done = False
+        obs  = []
+
+        print('Starting run...')
+        while done == False:
+            observation, reward, done, info = self.step(0)
+            obs.append(observation)
+        obs = np.array(obs)
+        print(obs.shape)
+        np.save('train.npy', obs)
+        print('Finished & saved.')
             
 
 if __name__ == '__main__':
+    '''run this program for quick test'''
     env = TradeEnv(window = 50, 
                    datadir = 'stocks/aapl_1min.csv', 
                    preprocesses = ['MinMax']
@@ -252,13 +268,3 @@ if __name__ == '__main__':
     while done == False:
         obs, r, done, i = env.step(0)
         env.render(mode = 'human')
-
-    # env.reset()
-    # done = False
-    # obs = []
-    # while done == False:
-    #     observation, reward, done, info = env.step(0)
-    #     obs.append(observation)
-    # obs = np.array(obs)
-    # print(obs.shape)
-    # np.save('train.npy', obs)
