@@ -3,3 +3,4 @@ trade_gym/envs/__pycache__
 trade_gym/__pycache__
 trade_gym/envs/renko.py
 .DS_Store
+/__pycache__
