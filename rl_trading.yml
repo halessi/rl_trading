@@ -21,7 +21,6 @@ dependencies:
     - attrs==19.1.0
     - cloudpickle==1.2.1
     - cycler==0.10.0
-    - dm-control==0.0.0
     - e==1.4.5
     - enum34==1.1.6
     - future==0.17.1
@@ -31,7 +30,6 @@ dependencies:
     - google-pasta==0.1.7
     - grpcio==1.21.1
     - gym==0.13.0
-    - gym-stocks==0.1.0
     - h5py==2.9.0
     - importlib-metadata==0.18
     - joblib==0.13.2

@@ -109,6 +109,9 @@ class TradeEnv(gym.Env):
         except ValueError: # we ALLOW failure here to enable ease of using datasets with oddly formatted times, XXX: add conversion
             pass
 
+        # some datasets are fucking big and...well bc we aren't learning well right now, it makes troubleshooting difficult
+        df = df[0:10000]
+
         if self.use_market_profile: 
             self.mp = MarketProfile(df, mode = 'tpo')
 
