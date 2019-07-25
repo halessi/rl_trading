@@ -22,7 +22,7 @@ source activate rl_trading
 
 # Training a model
 TensorForce and OpenAI Gym, two incredible resources for RL-learning, provide a neat and clean 
-manner for formalizing the interactions between the agent and environment. This allos the code to configure the agent
+manner for formalizing the interactions between the agent and environment. This allows the code to configure the agent
 as a separate entity from the underlying environment that handles all of the stock-data manipulation. 
 
 For some background, remember that the basic formulation for training a reinforcement learning agent is as follows:
