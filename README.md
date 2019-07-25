@@ -12,7 +12,7 @@ If you'd like to make use of this code the current, easiest method for doing so 
 ```
 git clone https://github.com/halessi/rl_trading
 cd rl_trading
-conda create -f rl_trading.yml
+conda env create -f rl_trading.yml
 ```
 
 Then activate the new environment with:
