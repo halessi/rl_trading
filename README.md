@@ -29,10 +29,7 @@ python main.py
 # Some results
 As can be seen in the images below, ....
 
-Problems with reinforcement learning in time-series challenges struggle from a variety of issues, including delayed credit assignment and a low signal-to-noise ratios. It is unclear whether the OHLCV data we use here, even when preprocessed, contains sufficient signal for advantageously predicting future prices. (data MinMax processed, hasn't been unscaled here)
-
-### BTC trading example
-![Optional Text](../master/imgs/BTC.png)
+Problems with reinforcement learning in time-series challenges struggle from a variety of issues, including delayed credit assignment and a low signal-to-noise ratios. It is unclear whether the OHLCV data we use here, even when preprocessed, contains sufficient signal for advantageously predicting future prices. (data MinMax processed, hasn't been unscaled here. immediate next step is to implement log-return scaling)
 
 ### $AAPL trading example
 ![Optional Text](../master/imgs/AAPL.png)
@@ -44,5 +41,6 @@ Problems with reinforcement learning in time-series challenges struggle from a v
 - [ ] incorporate sentiment analysis into state information
 - [ ] set up command-line-args input to enable more rapid model and environment prototyping
 - [ ] attempt to use an autoencoder for feature extraction on OHLCV data before feeding to RL
+- [ ] implement log-return scaling
 - [X] implement basic MinMax scaling with scikit-learn
 - [X] build OpenAI gym environment
