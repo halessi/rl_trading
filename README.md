@@ -1,4 +1,6 @@
-**this is in progress. check for periodic updates! also: there are so many problems with this, please DO NOT attempt to use it in any live setting.**
+**this is in progress. check for periodic updates! **
+
+also: there are so many problems with this, please DO NOT attempt to use it in any live setting.
 
 ![Optional Text](../master/imgs/fomo.gif)
 
