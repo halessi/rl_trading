@@ -1,6 +1,10 @@
 import argparse
 import json
 
+# get rid of all the tensorflow errors with this v1/v2 stuff
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+
 import gym
 import numpy as np
 from tensorforce.agents import Agent
@@ -50,6 +54,10 @@ def main(args):
                             )
     )
 
+    print('*'*60)
+    print('\n')
+    print('Training for {} episodes...'.format(args.episodes))
+
     runner = Runner(agent = agent, environment = env)
 
     def episode_finished(r):
@@ -77,14 +85,14 @@ def main(args):
         if d:
             break
     
-    plot(collectables, 0.001) # plot only .1% of one episode
+    plot(collectables, 0.01) # plot only .1% of one episode
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process command line args...')
 
-    parser.add_argument('-w', '--window', help = 'number of time-steps to use in each state', default = 50)
-    parser.add_argument('-p', '--preprocess', help = 'how to preprocess data. options: minMax, ..', default = 'MinMax')
-    parser.add_argument('-e', '--episodes', help = 'number of episodes to train for', default = 10)
+    parser.add_argument('-w', '--window', type = int, help = 'number of time-steps to use in each state', default = 50)
+    parser.add_argument('-p', '--preprocess', help = 'how to preprocess data. options: minMax, ..', default = 'log_transform')
+    parser.add_argument('-e', '--episodes', type = int, help = 'number of episodes to train for', default = 10)
     parser.add_argument('-a', '--agent', 
         help = 'agent config, examples in configs/agents/ taken from TensorForce at https://github.com/tensorforce/tensorforce/tree/major-revision/examples/configs', 
         default = 'configs/agents/dqn.json')

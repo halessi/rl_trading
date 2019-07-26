@@ -27,3 +27,19 @@ def plot(collectables, portion):
     # save plot
     plt.savefig('imgs/BTC')
     plt.show()
+
+def print_data_info(data):
+    '''
+    pretty print method for training data/info, 
+    easy way to confirm things loaded correctly
+    '''
+
+    print('*'*60)
+    print('\n')
+    print('Data loaded, shape {}.'.format(data.shape) + ' Data columns: {}.'.format(data.columns))
+    print('Number of null values after dropping: {}. (If this is >1, reward will be NaN.)'.format(data.isnull().sum().sum()))
+    print('\n')
+    print(data.head(n=5))
+    print('\n')
+    print('*'*60)
+    

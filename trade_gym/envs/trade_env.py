@@ -2,12 +2,13 @@ import os
 
 import gym
 import matplotlib.pyplot as plt
-plt.style.use('ggplot')
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 from gym import spaces
+from utils import print_data_info
 
+plt.style.use('ggplot')
 
 class TradeEnv(gym.Env):
     '''Trading environment. 
@@ -48,11 +49,11 @@ class TradeEnv(gym.Env):
         for preprocess in preprocesses:
             if preprocess == 'None':
                 pass
-            elif preprocess == 'MinMax':
+            elif preprocess == 'MinMax':            # normalized 0 to 1, wouldn't recommend
                 self.data = self.preprocess_MinMax()
-            elif preprocess == 'renko':
+            elif preprocess == 'renko':             # blocks
                 self.data = self.preprocess_renko()
-            elif preprocess == 'log_transform':
+            elif preprocess == 'log_transform':     # log return values
                 self.data = self.preprocess_log_transform()
             elif preprocess == 'autoencode':
                 self.data = self.preprocess_autoencode()
@@ -60,13 +61,15 @@ class TradeEnv(gym.Env):
         if self.observation_space is None: # not yet set by preprocessing
             self.observation_space = dict(type = 'float', shape = [self.window, self.data.shape[1]])
             #self.observation_space = spaces.Box(low = 0, high = 10000, shape = (self.window, self.data.shape[1]))
-            print(self.data.head(n=5))
+        
+        # data should be loaded and processed
+        print_data_info(self.data)
 
     def reset(self):
-        self.cash = 1e6 # 1,000,000 to start
+        self.cash   = 1e6 # 1,000,000 to start
         self.equity = 0
-        self.steps = self.window
         self.equity = 0
+        self.steps  = self.window
         self.past_actions = []
 
         return self.get_next_state()
@@ -83,7 +86,11 @@ class TradeEnv(gym.Env):
         return NotImplementedError
 
     def preprocess_log_transform(self):
-        return NotImplementedError
+        for column in self.data.columns:
+            self.data[column]    = np.log(self.data[column]/self.data[column].shift(1))
+            self.data[column][self.window] = 0
+
+        return self.data
 
     def preprocess_autoencode(self):
         from keras.models import load_model
@@ -110,7 +117,7 @@ class TradeEnv(gym.Env):
             pass
 
         # some datasets are fucking big and...well bc we aren't learning well right now, it makes troubleshooting difficult
-        df = df[0:10000]
+        df = df[0:100000]
 
         if self.use_market_profile: 
             self.mp = MarketProfile(df, mode = 'tpo')
@@ -125,14 +132,15 @@ class TradeEnv(gym.Env):
                     df.ix[i+self.window, key] = value
 
         try: 
-            df = df.iloc[self.window:]
-            df.fillna(method = 'ffill', inplace = True)
             df.drop(['Date', 'Time'], axis = 1, inplace = True)
         except AttributeError:
             pass
 
-        print('Data loaded, shape {}.'.format(df.shape))
-        print('Number of null values after dropping: {}.'.format(df.isnull().sum().sum()))
+        for column in df:
+            df[column][1:] = pd.to_numeric(df[column][1:])
+
+        df = df.iloc[self.window:]
+        df.fillna(method = 'ffill', inplace = True)
         return df
 
     def get_current_price(self):
