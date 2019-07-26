@@ -37,7 +37,7 @@ def print_data_info(data):
     print('*'*60)
     print('\n')
     print('Data loaded, shape {}.'.format(data.shape) + ' Data columns: {}.'.format(data.columns))
-    print('Number of null values after dropping: {}. (If this is >1, reward will be NaN.)'.format(data.isnull().sum().sum()))
+    print('Number of null values after dropping: {}. (If this is >0, reward will be NaN.)'.format(data.isnull().sum().sum()))
     print('\n')
     print(data.head(n=5))
     print('\n')
