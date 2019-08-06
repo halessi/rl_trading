@@ -57,7 +57,7 @@ python main.py /
     --window=      # whatever length of timesteps you'd like each state to include
     --preprocess=  # how you'd like the data to be preprocessed, options (TO EVENTUALLY) include: [MinMax, Renko log-return, autoencoded, hopefully more]
     --episodes=    # the number of episodes to train for. an episode is a full run through the dataset
-    --agent=       # agent, how actions are chosen from network results
+    --agent=       # agent type to use
     --network=     # network architecture for data analysis
 ```
 
