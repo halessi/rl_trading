@@ -75,7 +75,7 @@ Problems with reinforcement learning in time-series challenges struggle from a v
 - [ ] explore applicability of renko-blocks for denoising time-series data
 - [ ] incorporate sentiment analysis into state information
 - [ ] attempt to use an autoencoder for feature extraction on OHLCV data before feeding to RL
-- [ ] implement log-return scaling
+- [X] implement log-return scaling
 - [X] set up command-line-args input to enable more rapid model and environment prototyping
 - [X] implement basic MinMax scaling with scikit-learn
 - [X] build OpenAI gym environment
