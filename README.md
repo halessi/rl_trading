@@ -11,7 +11,7 @@ Please reach out if you have any questions!
 __hughalessi@gmail.com__
 
 # Installation
-If you'd like to make use of this code the current, easiest method for doing so will be cloning the repository and creating a new conda environment based upon the yml file. 
+If you'd like to make use of this code, the easiest method for doing so will be cloning the repository and creating a new conda environment based upon the yml file. 
 
 ```
 git clone https://github.com/halessi/rl_trading
@@ -26,7 +26,7 @@ source activate rl_trading
 
 # Training a model
 TensorForce and OpenAI Gym, two incredible resources for RL-learning, provide a neat and clean 
-manner for formalizing the interactions between the agent and environment. This allows the code to configure the agent
+manner for formalizing the interactions between the agent and environment. This allows the code to configure the agent to act
 as a separate entity from the underlying environment that handles all of the stock-data manipulation. 
 
 For some background, remember that the basic formulation for training a reinforcement learning agent is as follows:
@@ -64,7 +64,7 @@ python main.py /
 # Some example trades
 As can be seen in the images below, ....
 
-Problems with reinforcement learning in time-series challenges struggle from a variety of issues, including delayed credit assignment and a low signal-to-noise ratios. It is unclear whether the OHLCV data we use here, even when preprocessed, contains sufficient signal for advantageously predicting future prices. (data MinMax processed, hasn't been unscaled here. immediate next step is to implement log-return scaling)
+Problems with reinforcement learning in time-series stem from a variety of issues, including delayed credit assignment and a low signal-to-noise ratios. It is unclear whether the OHLCV data we use here, even when preprocessed, contains sufficient signal for advantageously predicting future prices. (data MinMax processed, hasn't been unscaled here. immediate next step is to implement log-return scaling)
 
 ### $AAPL 
 ![Optional Text](../master/imgs/AAPL.png)
