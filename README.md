@@ -69,7 +69,7 @@ Problems with reinforcement learning in time-series stem from a variety of issue
 ### $AAPL 
 ![Optional Text](../master/imgs/AAPL.png)
 
-# Future steps (notes for me!)
+# Future steps
 - [ ] run with aggregated bitcoin order book data
 - [ ] implement here a convolutional network for derivation of more specific state information
 - [ ] explore applicability of renko-blocks for denoising time-series data
