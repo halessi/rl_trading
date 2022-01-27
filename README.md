@@ -4,12 +4,6 @@ also: there are so many problems with this, please **DO NOT** attempt to use it 
 
 ![Optional Text](../master/imgs/fomo.gif)
 
-# rl_trading
-I've created this repo out of an effort to better track my explorations of various topics related to algorithmic trading, usually RL-based. **I'll be working over the next couple months** to build this out as a consolidated code-base for all the various side projects I've explored. 
-
-Please reach out if you have any questions!
-__hughalessi@gmail.com__
-
 # Installation
 If you'd like to make use of this code, the easiest method for doing so will be cloning the repository and creating a new conda environment based upon the yml file. 
 
