@@ -1,4 +1,4 @@
-**this is in progress. check for periodic updates!**
+**this is NOT in progress. probably will never be updated**
 
 also: there are so many problems with this, please **DO NOT** attempt to use it in any live setting.
 
